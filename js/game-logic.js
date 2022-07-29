@@ -14,6 +14,8 @@ let playerOneMoveOneType,
    playerTwoMoveThreeType,
    playerTwoMoveThreeValue;
 
+// mengambil data inputan setiap player 1 dan player 2. dan menampungnya ke variable
+
 function setPlayerMoves(
    player,
    moves1,
@@ -45,6 +47,8 @@ function setPlayerMoves(
       playerTwoMoveThreeValue = value3;
    }
 }
+
+// mengecheck kemenangan setiap round antara player 1 dan player 2
 
 function getRoundWinner(numRound) {
    switch (numRound) {
@@ -78,41 +82,29 @@ function getRoundWinner(numRound) {
    }
 }
 
+// membuat logic random value pada player komputer
+
+function setComputerMoves() {
+   const data = ["rock", "paper", "scissors"];
+
+   playerTwoMoveOneType = data[Math.floor(Math.random() * 3)];
+   playerTwoMoveTwoType = data[Math.floor(Math.random() * 3)];
+   playerTwoMoveThreeType = data[Math.floor(Math.random() * 3)];
+
+   playerTwoMoveOneValue = Math.floor(Math.random() * 97);
+   playerTwoMoveTwoValue = Math.floor(
+      Math.random() * (96 - playerTwoMoveOneValue)
+   );
+   playerTwoMoveThreeValue = 99 - playerTwoMoveTwoValue - playerTwoMoveOneValue;
+}
+
+// membuat rule siapa yang menang antara player 1 dan player 2
+
 function checkWhosWin(p1, v1, p2, v2) {
    // buat rules untuk seri agar mengambil strengthnya
    // move 1 : rock = 30
    // move 2 : rock = 60
    // move 3 : paper = 9
-
-   // if (p1 === p2) {
-   //    if (v1 > v2) {
-   //       return "Player One";
-   //    } else if (v1 < v2) {
-   //       return "Player Two";
-   //    } else {
-   //       return "Tie";
-   //    }
-   // }
-
-   // if (p1 === "rock") {
-   //    if (p2 !== "paper") {
-   //       return "Player One";
-   //    } else {
-   //       return "Player Two";
-   //    }
-   // } else if (p1 === "paper") {
-   //    if (p2 !== "scissors") {
-   //       return "Player One";
-   //    } else {
-   //       return "Player Two";
-   //    }
-   // } else if (p1 === "scissors") {
-   //    if (p2 !== "rock") {
-   //       return "Player One";
-   //    } else {
-   //       return "Player Two";
-   //    }
-   // }
 
    return p1 === p2
       ? v1 > v2
@@ -127,6 +119,8 @@ function checkWhosWin(p1, v1, p2, v2) {
       : "Player Two";
 }
 
+// menampilkan hasil kemenangan dari total seluruh round
+
 function getGameWinner() {
    let arrWin = [getRoundWinner(1), getRoundWinner(2), getRoundWinner(3)];
 
@@ -137,14 +131,6 @@ function getGameWinner() {
    let p2 = arrWin.filter(function (item) {
       return item === "Player Two";
    }).length;
-
-   // if (p1 > p2) {
-   //    return "Player One";
-   // } else if (p1 < p2) {
-   //    return "Player Two";
-   // } else {
-   //    return "Tie";
-   // }
 
    return p1 > p2 ? "Player One" : p1 < p2 ? "Player Two" : "Tie";
 }
